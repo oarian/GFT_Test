@@ -1,0 +1,97 @@
+﻿@model GFT_Test.Entities.Puzzel
+
+@{
+    ViewBag.Title = "Word Search";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Find the words</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10">
+        <table>
+            @for (var x = 0; x < ViewBag.Rows; x++)
+            {
+            <tr>
+                @for (var y = 0; y < ViewBag.Columns; y++)
+                {
+                    if (Model.puzzelSolutions != null && Model.puzzelSolutions.Count > 0)
+                    {
+                        var isSolution = false;
+                        foreach (var word in Model.puzzelSolutions)
+                        {
+                            isSolution = word.breakdown.Count(b => b.row == x && b.column == y) > 0;
+                            if (isSolution)
+                            {
+                                <td class="cellSolutionFormat">@Model.matrix[x, y]</td>
+                                break;
+                            }
+                        }
+
+                        if (!isSolution)
+                        {
+                            <td class="cellFormat">@Model.matrix[x, y]</td>
+                        }
+                    }
+                    else
+                    {
+                        <td class="cellFormat">@Model.matrix[x, y]</td>
+                    }
+                }
+            </tr>
+            }
+        </table>
+
+        <p>
+            <div class="form-group">
+                <input type="button" value="Get Solution" class="btn btn-success" onclick="location.href='@Url.Action("Solve","Home")'" />
+            </div>
+
+            <div class="form-group">
+                <input type="button" value="Download Solution" class="btn btn-warning" onclick="location.href='@Url.Action("Download","Home")'" />
+            </div>
+        </p>
+
+    </div>
+
+    <div class="col-md-2">
+        <table>
+            @for (int i = 0; i < Model.wordsToFind.Count(); i++)
+            {
+            <tr>
+                @if (Model.puzzelSolutions != null && Model.puzzelSolutions.Count > 0)
+                {
+                    var isSolution = false;
+                    foreach (var word in Model.puzzelSolutions)
+                    {
+                        isSolution = word.word == Model.wordsToFind[i];
+                        if (isSolution)
+                        {
+                            <td class="wordFound">
+                                @Html.Label(Model.wordsToFind[i])
+                            </td>
+                            break;
+                        }
+                    }
+
+                    if (!isSolution)
+                    {
+                        <td>
+                            @Html.Label(Model.wordsToFind[i])
+                        </td>
+                    }
+                }
+                else
+                {
+                <td>
+                    @Html.Label(Model.wordsToFind[i])
+                </td>
+                }
+            </tr>
+            }
+        </table>
+    </div>
+</div>
