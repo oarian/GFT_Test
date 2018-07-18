@@ -4,17 +4,27 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Reflection;
 
 namespace GFT_Test.Common
 {
     public static class ReadJsonFile
     {
-
+        
         public static List<Base> ReadBaseFile()
         {
-            List<Base> baseList = null;
+            var assembly = Assembly.GetExecutingAssembly();
+            var fileName = "GFT_Test.Common.Resources.base.json";
 
-            var baseFile = Encoding.ASCII.GetString(ResourceFiles._base);
+            List<Base> baseList = null;
+            string baseFile = string.Empty;
+
+            using (Stream stream = assembly.GetManifestResourceStream(fileName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                baseFile = reader.ReadToEnd();
+            }
+
             baseList = JsonConvert.DeserializeObject<List<Base>>(baseFile);
 
             return baseList;
@@ -22,19 +32,37 @@ namespace GFT_Test.Common
 
         public static List<List<Value>> ReadValuesFile()
         {
-            List<List<Value>> valueList = null;
+            var assembly = Assembly.GetExecutingAssembly();
+            var fileName = "GFT_Test.Common.Resources.values.json";
 
-            var valueFile = Encoding.ASCII.GetString(ResourceFiles.values);
-            valueList = JsonConvert.DeserializeObject<List<List<Value>>>(valueFile);
+            List<List<Value>> valueList = null;
+            string valuesFile = string.Empty;
+
+            using (Stream stream = assembly.GetManifestResourceStream(fileName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                valuesFile = reader.ReadToEnd();
+            }
+
+            valueList = JsonConvert.DeserializeObject<List<List<Value>>>(valuesFile);
 
             return valueList;
         }
 
         public static List<string> ReadCypherFile()
         {
-            List<string> cypherRowList = null;
+            var assembly = Assembly.GetExecutingAssembly();
+            var fileName = "GFT_Test.Common.Resources.cypher.json";
 
-            var cypherFile = Encoding.ASCII.GetString(ResourceFiles.cypher);
+            List<string> cypherRowList = null;
+            string cypherFile = string.Empty;
+
+            using (Stream stream = assembly.GetManifestResourceStream(fileName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                cypherFile = reader.ReadToEnd();
+            }
+
             cypherRowList = JsonConvert.DeserializeObject<List<string>>(cypherFile);
 
             return cypherRowList;
@@ -42,9 +70,18 @@ namespace GFT_Test.Common
 
         public static List<string> ReadWordsFile()
         {
-            List<string> wordList = null;
+            var assembly = Assembly.GetExecutingAssembly();
+            var fileName = "GFT_Test.Common.Resources.words.json";
 
-            var wordsFile = Encoding.ASCII.GetString(ResourceFiles.words);
+            List<string> wordList = null;
+            string wordsFile = string.Empty;
+
+            using (Stream stream = assembly.GetManifestResourceStream(fileName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                wordsFile = reader.ReadToEnd();
+            }
+            
             wordList = JsonConvert.DeserializeObject<List<string>>(wordsFile);
 
             return wordList;

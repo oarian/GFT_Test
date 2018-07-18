@@ -5,26 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\base.json" />
+    <None Remove="Resources\cypher.json" />
+    <None Remove="Resources\values.json" />
+    <None Remove="Resources\words.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\base.json" />
+    <EmbeddedResource Include="Resources\cypher.json" />
+    <EmbeddedResource Include="Resources\values.json" />
+    <EmbeddedResource Include="Resources\words.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GFT_Test.Entities\GFT_Test.Entities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="ResourceFiles.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceFiles.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="ResourceFiles.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceFiles.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
