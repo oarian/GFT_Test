@@ -37,13 +37,6 @@ namespace Puzzel_Test.Controllers
             puzzel.puzzelSolutions = new SolvePuzzel().FindWords(puzzel.matrix);
 
             return RedirectToAction("Index");
-
-            //string solutionJson = JsonConvert.SerializeObject(puzzel.puzzelSolutions);
-
-            //string filename = "solution.json";
-
-            //var byteArray = Encoding.ASCII.GetBytes(solutionJson);
-            //return File(byteArray, System.Net.Mime.MediaTypeNames.Text.Plain, filename);
         }
 
         public FileResult Download()
